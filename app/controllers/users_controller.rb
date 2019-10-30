@@ -12,9 +12,18 @@ class UsersController < ApplicationController
 
   # POST: /users
   post "/users" do
+    # check if email is already in the database
+    #   if it is redirect user back to signup page with error message
     @user = User.new(email: params["email"], username: params["username"], password: params["password"])
-    binding.pry
-    redirect "/users"
+    if !!User.find_by_email(@user.email)
+      redirect to "/users/new"
+    end
+
+    if @user.save
+      redirect to '/login'
+    end
+    # binding.pry
+    # redirect "/users"
   end
 
   # GET: /users/5
