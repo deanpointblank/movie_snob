@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     #   if it is redirect user back to signup page with error message
     @user = User.new(email: params["email"], username: params["username"], password: params["password"])
     if !!User.find_by_email(@user.email)
-      redirect to "/users/new"
+      redirect to "/signup"
     end
 
     if @user.save
