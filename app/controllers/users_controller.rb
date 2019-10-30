@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 
   # GET: /users/5
   get "/users/:id" do
+    binding.pry
     erb :"/users/show.html"
   end
 
