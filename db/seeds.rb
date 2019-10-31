@@ -4,10 +4,9 @@ require 'omdb/api'
 
 Db_movie_seeder.get_movies
 
-client = Omdb::Api::Client.new(api_key: a44e8752)
+client = Omdb::Api::Client.new(api_key: "a44e8752")
 
 Db_movie_seeder.all.each do |movie|
-    puts "creating Movie objects....."
     unless !!Movie.find_by_title(movie)
         movie = client.find_by_title(movie)
         unless movie.error
@@ -22,5 +21,4 @@ Db_movie_seeder.all.each do |movie|
             )
         end
     end
-    puts "complete"
 end
