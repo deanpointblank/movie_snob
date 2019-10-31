@@ -1,6 +1,7 @@
 class CreatePosts < ActiveRecord::Migration
   def change
     create_table :posts do |t|
+      t.string :title
       t.string :comment
       t.integer :user_id
       t.integer :movie_id

@@ -12,6 +12,9 @@ class PostsController < ApplicationController
 
   # POST: /posts
   post "/posts" do
+    binding.pry
+    @user = User.find_by_id(session["id"])
+    @post = Post.create(title: params["title"], comment: params["content"], user_id: session["user_id"])
     redirect "/posts"
   end
 

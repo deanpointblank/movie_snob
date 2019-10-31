@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20191030025950) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.string   "title"
     t.string   "comment"
     t.integer  "user_id"
     t.integer  "movie_id"

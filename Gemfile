@@ -11,6 +11,10 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
+gem 'omdb-api'
+gem 'json'
+gem 'nokogiri'
+gem 'mechanize'
 
 group :test do
   gem 'rspec'

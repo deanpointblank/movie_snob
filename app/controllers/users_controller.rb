@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     #   if it is redirect user back to signup page with error message
     @user = User.new(email: params["email"], username: params["username"], password: params["password"])
     if !!User.find_by_email(@user.email)
-      redirect to "/signup"
+      redirect to "/signup" # with error
     end
 
     if @user.save
@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 
   # GET: /users/5
   get "/users/:id" do
+    @user = User.find_by_id(params["id"])
     binding.pry
     erb :"/users/show.html"
   end

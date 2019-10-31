@@ -1,1 +1,30 @@
-<h1>This is the Model's index page.</h1>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Snob</title>
+  </head>
+  <body>
+    <h1>This is the Post Model's index page.</h1>
+    <% if logged_in? %>
+      <a href="#">Log Out</a>
+      <h2><%="Hello #{@user.username}"%></h2>
+        <form method="POST" action="/posts">
+            <h3>Release Your Inner Snob</h3>
+
+            </br>
+            <input type = "text" name = "title" id = "post" placeholder = "Title" maxlength = "40">
+            </br>
+            <input type = "text" name = "content" id = "post" placeholder = "Say Something!" maxlength = "140">
+            </br>
+            <input type = "submit" value = "Submit">
+        </form>
+        <% Post.all.each do |post|%>
+          <h3><%= post.title %></h3>
+          <p><%= post.content%></p>
+        <% end %>
+    <% else %>
+        <% redirect to '/'%>
+    <% end %>
+  </body>
+</html>
