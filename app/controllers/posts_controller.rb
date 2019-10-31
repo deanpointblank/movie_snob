@@ -12,10 +12,14 @@ class PostsController < ApplicationController
 
   # POST: /posts
   post "/posts" do
+    @user = User.find_by_id(session["user_id"])
+    @post = Post.new(title: params["title"], comment: params["comment"], user_id: session["user_id"])
     binding.pry
-    @user = User.find_by_id(session["id"])
-    @post = Post.create(title: params["title"], comment: params["content"], user_id: session["user_id"])
-    redirect "/posts"
+    if !!@post.comment
+      @post.save
+    end
+    #if no comment redirect to create page w/; eroor
+    erb :"/posts/index.html"
   end
 
   # GET: /posts/5
