@@ -1,1 +1,18 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>This is the show page for an individual instance of your post model.</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Snob</title>
+  </head>
+  <body>
+    <% if logged_in? && session["user_id"] == @post.user_id%>
+        <h3><%= @post.title %></h3> 
+        <h4><%= @post.movie.title %></h4>
+        <img src="<%= @post.movie.poster %>">
+        <p><%= @post.comment %><p> 
+        <a href ="/movies/<%= @post.movie_id %>">more about the film</a> 
+    <% else %>
+        <% redirect to '/'%>
+    <% end %>
+  </body>
+</html>

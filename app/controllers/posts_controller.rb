@@ -14,10 +14,11 @@ class PostsController < ApplicationController
   post "/posts" do
 
     client = Omdb::Api::Client.new(api_key: "a44e8752")
+    binding.pry
+    searched_movies = client.find_by_title(params["movie"].capitalize)
+    if !params["movie"].empty? && !!searched_movies
 
-    if !params["movie"].empty? #&& !Movie.find_by_title(params["movie"])
-      binding.pry
-      movie = client.find_by_title(params["movie"])
+      movie = searched_movies
       db_movie = Movie.find_by_title(movie.title)
       
       if !!db_movie && movie.title == db_movie.title
@@ -53,6 +54,8 @@ class PostsController < ApplicationController
 
   # GET: /posts/5
   get "/posts/:id" do
+    binding.pry
+    @post = Post.find_by_id(params["id"])
     erb :"/posts/show.html"
   end
 
