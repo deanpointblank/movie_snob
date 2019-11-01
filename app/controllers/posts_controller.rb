@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   # GET: /posts
   get "/posts" do
+    @user = User.find_by_id(session["user_id"])
     erb :"/posts/index.html"
   end
 
@@ -12,7 +13,6 @@ class PostsController < ApplicationController
 
   # POST: /posts
   post "/posts" do
-    binding.pry
 
     client = Omdb::Api::Client.new(api_key: "a44e8752")
     
@@ -80,6 +80,6 @@ class PostsController < ApplicationController
     @post = Post.find_by_id(params["id"])
     @post.delete
     @user = User.find_by(session["user_id"])
-    erb :"/posts/index.html"
+    redirect to "/posts"
   end
 end
