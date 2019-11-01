@@ -1,1 +1,21 @@
 <h1>This is the show page for an individual instance of your model.</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Snob</title>
+  </head>
+  <body>
+    <h2><%= @movie.title %></h2> 
+    <img src="<%= @movie.poster %>">
+    <p><%= @movie.rating %><p> 
+    <p><%= @movie.runtime %><p>
+    <p><%= @movie.genre %><p>
+    <p><%= @movie.blurb %><p>
+    <p><%= @movie.director %><p>
+    <% @movie.posts.each do |post|%>
+        <h3><%= post.title %></h3>
+        <p><%= post.comment %></p>
+        <h4>-<%= post.user.username %></h4>
+    <% end %>
+  </body>
+</html>

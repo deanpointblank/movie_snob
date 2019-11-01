@@ -21,11 +21,13 @@ class PostsController < ApplicationController
     #check if the object recieved from the serch is an error or not
     if !params["movie"].empty? && searched_movies.class.to_s != "Omdb::Api::Error"
       movie = searched_movies.first
+      movie = client.find_by_id(movie.imdb_id)
       db_movie = Movie.find_by_title(movie.title)
       
       if !!db_movie && movie.title == db_movie.title
         @movie = db_movie
       else
+        binding.pry
         @movie = Movie.create(
           :title => movie.title,
           :poster => movie.poster,
