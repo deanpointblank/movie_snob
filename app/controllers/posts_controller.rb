@@ -60,18 +60,26 @@ class PostsController < ApplicationController
     erb :"/posts/show.html"
   end
 
-  # # GET: /posts/5/edit
-  # get "/posts/:id/edit" do
-  #   erb :"/posts/edit.html"
-  # end
+  # GET: /posts/5/edit
+  get "/posts/:id/edit" do
+    @post = Post.find_by_id(params["id"])
+    erb :"/posts/edit.html"
+  end
 
-  # # PATCH: /posts/5
-  # patch "/posts/:id" do
-  #   redirect "/posts/:id"
-  # end
+  # PATCH: /posts/5
+  patch "/posts/:id" do
+    @post = Post.find_by_id(params["id"])
+    @post.title = params["title"]
+    @post.comment = params["comment"]
+    @post.save
+    redirect "/posts/#{@post.id}"
+  end
 
-  # # DELETE: /posts/5/delete
-  # delete "/posts/:id/delete" do
-  #   redirect "/posts"
-  # end
+  # DELETE: /posts/5/delete
+  delete "/posts/:id/delete" do
+    @post = Post.find_by_id(params["id"])
+    @post.delete
+    @user = User.find_by(session["user_id"])
+    erb :"/posts/index.html"
+  end
 end

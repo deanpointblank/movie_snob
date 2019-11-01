@@ -1,1 +1,31 @@
 <h1>Insert the form to edit an instance of your model here.</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Snob</title>
+  </head>
+  <body>
+    <% if logged_in? && session["user_id"] == @post.user_id%>
+        <h3><%= @post.title %></h3> 
+        <h4><%= @post.movie.title %></h4>
+        <img src="<%= @post.movie.poster %>">
+        <p><%= @post.comment %><p> 
+        <a href ="/movies/<%= @post.movie_id %>">more about the film</a>
+        <form method="POST" action="/posts/<%= @post.id %>">
+            <input id = "hidden" type = "hidden" name = "_method" value = patch>
+            <h3>edit your post</h3>
+            <input type = "text" name = "title" id = "post" placeholder = "Title" maxlength = "40">
+            </br>
+            <input type = "text" name = "comment" id = "commetn" placeholder = "Say Something!" maxlength = "140">
+            </br>
+            <input type = "submit" value = "Submit">
+        </form>
+        <form action = "/posts/<%=@post.id%>/delete" method="POST">
+            <input id = "hidden" type = "hidden" name = "_method" value = "DELETE">
+            <input type = "submit" value = "Delete Post">
+        </form>
+    <% else %>
+        <% redirect to '/'%>
+    <% end %>
+  </body>
+</html>

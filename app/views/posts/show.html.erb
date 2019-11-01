@@ -10,7 +10,8 @@
         <h4><%= @post.movie.title %></h4>
         <img src="<%= @post.movie.poster %>">
         <p><%= @post.comment %><p> 
-        <a href ="/movies/<%= @post.movie_id %>">more about the film</a> 
+        <a href ="/movies/<%= @post.movie_id %>">more about the film</a>
+        <a href = "/posts/<%= @post.id %>/edit">edit this post</a>
     <% else %>
         <% redirect to '/'%>
     <% end %>
