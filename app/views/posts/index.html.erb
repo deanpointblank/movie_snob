@@ -7,7 +7,7 @@
   <body>
     <h1>This is the Post Model's index page.</h1>
     <% if logged_in? %>
-      <a href="#">Log Out</a>
+      <a href="/logout">Log Out</a>
       <h2><%="Hello #{@user.username}"%></h2>
         <form method="POST" action="/posts">
             <h3>Release Your Inner Snob</h3>
@@ -24,7 +24,11 @@
         <% Post.all.each do |post|%>
           <h3><%= post.title %></h3>
           <p><%= post.comment %></p>
+          <p><%= post.user.username%></p>
           <a href = "/posts/<%=post.id%>">go to post</a>
+          <% if session[:user_id] == post.user.id %>
+            <a href = "/posts/<%=post.id%>/edit">edit your post </a>
+          <% end %>
         <% end %>
     <% else %>
         <% redirect to '/'%>

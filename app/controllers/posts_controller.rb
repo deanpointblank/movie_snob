@@ -80,8 +80,12 @@ class PostsController < ApplicationController
   # DELETE: /posts/5/delete
   delete "/posts/:id/delete" do
     @post = Post.find_by_id(params["id"])
-    @post.delete
-    @user = User.find_by(session["user_id"])
-    redirect to "/posts"
+    if session[:user_id] == @post.user.id
+      @post.delete
+      @user = User.find_by(session["user_id"])
+      redirect to "/posts"
+    else
+      erb :failure
+    end
   end
 end

@@ -1,1 +1,22 @@
-<h1>This is the Model's index page.</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Snob</title>
+  </head>
+  <body>
+    <h1>This is the Movie Model's index page.</h1>
+    <% if logged_in? %>
+        <a href="/logout">Log Out</a>
+    <%else%>
+        <a href="/signup">Signup up</a>
+    <%end%>
+    
+    <%# <% Movie.all.each do |movie|%>
+        <h3><%= Movie.title %></h3>
+        <img src="<%= @movie.poster %>">
+        <p><%= @movie.genre %><p>
+        <p><%= @movie.blurb %><p>
+        <a href = "/posts/<%=post.id%>">go to post</a>
+    <% end %> %>
+  </body>
+</html>

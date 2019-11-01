@@ -11,7 +11,10 @@
         <img src="<%= @post.movie.poster %>">
         <p><%= @post.comment %><p> 
         <a href ="/movies/<%= @post.movie_id %>">more about the film</a>
-        <a href = "/posts/<%= @post.id %>/edit">edit this post</a>
+        <% if @post.user_id == session[:user_id]%>
+          <a href = "/posts/<%= @post.id %>/edit">edit this post</a>
+        <%end%>
+        <a href ="/posts">back to posts</a>
     <% else %>
         <% redirect to '/'%>
     <% end %>
