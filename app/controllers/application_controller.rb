@@ -40,4 +40,11 @@ class ApplicationController < Sinatra::Base
     end
 
   end
+
+  get '/logout' do
+    binding.pry
+    session.clear
+    redirect to "/"
+  end
+
 end

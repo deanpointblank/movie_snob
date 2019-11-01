@@ -12,19 +12,20 @@ class PostsController < ApplicationController
 
   # POST: /posts
   post "/posts" do
+    binding.pry
 
     client = Omdb::Api::Client.new(api_key: "a44e8752")
-    binding.pry
-    searched_movies = client.find_by_title(params["movie"].capitalize)
-    if !params["movie"].empty? && !!searched_movies
+    
 
-      movie = searched_movies
+    searched_movies = client.search(params["movie"])
+    #check if the object recieved from the serch is an error or not
+    if !params["movie"].empty? && searched_movies.class.to_s != "Omdb::Api::Error"
+      movie = searched_movies.first
       db_movie = Movie.find_by_title(movie.title)
       
       if !!db_movie && movie.title == db_movie.title
         @movie = db_movie
       else
-        binding.pry
         @movie = Movie.create(
           :title => movie.title,
           :poster => movie.poster,
@@ -38,14 +39,15 @@ class PostsController < ApplicationController
     # elsif !!Movie.find_by_title(params["movie"])
     #   @movie = Movie.find_by_title(params["movie"])
     else
-      binding.pry
       #redirect user to post page w/ error
-      redirect to :"/failure"
+      #binding.pry
+      @user = User.find_by_id(session["user_id"])
+      redirect to "/posts"
     end
 
     @user = User.find_by_id(session["user_id"])
     @post = Post.new(title: params["title"], comment: params["comment"], user_id: @user.id, movie_id: @movie.id)
-    if !!@post.comment
+    if !@post.comment.empty? && !@post.title.empty?
       @post.save
     end
     #if no comment redirect to create page w/; eroor
@@ -54,7 +56,6 @@ class PostsController < ApplicationController
 
   # GET: /posts/5
   get "/posts/:id" do
-    binding.pry
     @post = Post.find_by_id(params["id"])
     erb :"/posts/show.html"
   end

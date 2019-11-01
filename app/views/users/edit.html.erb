@@ -1,1 +1,24 @@
 <h1>Insert the form to edit an instance of your model here.</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Snob</title>
+  </head>
+  <body>
+    <h1>Movie Snob</h1>
+    <form method="POST" action="/users/<%= @user.id %>">
+        <input id = "hidden" type = "hidden" name = "_method" value = "PATCH">
+        <h3>Release Your Inner Snob</h3>
+        <input type = "text" name = "username" id = "username" placeholder = "Change Your Username">
+        </br>
+        <input type = "password" name = "password" id = "password" placeholder = "Change Your Password">
+        </br>
+        <input type = "submit" value = "submit">
+    </form>
+    <form action = "/users/<%=@user.id%>/delete" method="POST">
+        <input id = "hidden" type = "hidden" name = "_method" value = "DELETE">
+        <input type = "submit" value = "Delete Account">
+    </form>
+
+  </body>
+</html>

@@ -6,8 +6,9 @@
   </head>
   <body>
     <% if logged_in? %>
-      <a href="#">Log Out</a>
-      <h2><%="Hello #{@user.username}"%></h2>
+      <a href="/logout">Log Out</a>
+      <a href="/users/<%= @user.id %>/edit">Edit Your Profile</a>
+      <h2>"Hello <%= @user.username %>"</h2>
         <form method="POST" action="/posts">
             <h3>Release Your Inner Snob</h3>
             </br>
