@@ -5,11 +5,6 @@
   </head>
   <body>
     <h1>This is the Movie Model's index page.</h1>
-    <% if logged_in? %>
-        <a href="/logout">Log Out</a>
-    <%else%>
-        <a href="/signup">Signup up</a>
-    <%end%>
     
     <%# <% Movie.all.each do |movie|%>
         <h3><%= Movie.title %></h3>

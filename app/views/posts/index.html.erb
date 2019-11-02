@@ -7,7 +7,6 @@
   <body>
     <h1>This is the Post Model's index page.</h1>
     <% if logged_in? %>
-      <a href="/logout">Log Out</a>
       <h2><%="Hello #{@user.username}"%></h2>
         <form method="POST" action="/posts">
             <h3>Release Your Inner Snob</h3>

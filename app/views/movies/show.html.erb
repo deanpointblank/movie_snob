@@ -5,11 +5,6 @@
     <title>Movie Snob</title>
   </head>
   <body>
-    <% if logged_in? %>
-        <a href="/logout">Log Out</a>
-    <%else%>
-        <a href="/signup">Signup up</a>
-    <%end%>
     <a href = "/">
     <h2><%= @movie.title %></h2> 
     <img src="<%= @movie.poster %>">
