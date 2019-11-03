@@ -27,6 +27,22 @@
         <input id = "hidden" type = "hidden" name = "_method" value = "DELETE">
         <button type = "submit" class="btn btn-primary col-md-3">Delete Account</button>
     </form>
+    </br>
+        <div class="card-columns">
+        <% @user.posts.each do |post|%>
+          <div class="card">
+            <img class="card-img-top" src="<%= post.movie.poster %>" alt="post.movie.blurb">
+            <div class="card-body">
+              <a href = "/posts/<%=post.id%>"><h5 class="card-title"><%= post.title %></h3></a>
+              <p class="card-text"><%= post.comment %></p>
+              <p class="card-text"><small class="text-muted"><%= post.user.username%></small></p>
+              <% if session[:user_id] == post.user.id %>
+                <a href = "/posts/<%=post.id%>/edit"><p class="card-text">edit your post</p></a>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        </div>
 
   </body>
 </html>
