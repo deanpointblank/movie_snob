@@ -5,7 +5,7 @@
     <title>Movie Snob</title>
   </head>
   <body>
-    <h1>This is the Post Model's index page.</h1>
+    <h1>Post index page.</h1>
     <% if logged_in? %>
       <h2><%="Hello #{@user.username}"%></h2>
         <form method="POST" action="/posts">
@@ -30,15 +30,24 @@
             </div>
             <button type = "submit" class="btn btn-primary col-md-2">Submit</button>
         </form>
+
+        <div class="card-columns">
         <% Post.all.each do |post|%>
-          <h3><%= post.title %></h3>
-          <p><%= post.comment %></p>
-          <p><%= post.user.username%></p>
-          <a href = "/posts/<%=post.id%>">go to post</a>
-          <% if session[:user_id] == post.user.id %>
-            <a href = "/posts/<%=post.id%>/edit">edit your post </a>
-          <% end %>
+          <div class="card">
+            <img class="card-img-top" src="<%= post.movie.poster %>" alt="post.movie.blurb">
+            <div class="card-body">
+              <a href = "/posts/<%=post.id%>"><h5 class="card-title"><%= post.title %></h3></a>
+              <p class="card-text"><%= post.comment %></p>
+              <p class="card-text"><small class="text-muted"><%= post.user.username%></small></p>
+              <% if session[:user_id] == post.user.id %>
+                <a href = "/posts/<%=post.id%>/edit"><p class="card-text">edit your post</p></a>
+              <% end %>
+            </div>
+          </div>
         <% end %>
+        </div>
+
+
     <% else %>
         <% redirect to '/'%>
     <% end %>
