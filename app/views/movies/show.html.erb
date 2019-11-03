@@ -4,8 +4,6 @@
     <title>Movie Snob</title>
   </head>
   <body>
-    <a href ="/users/<%= session[:user_id] %>">Back to your Posts </a>
-    <a href = "/posts" >Back to all Posts </a>
     <h2><%= @movie.title %></h2> 
     <img src="<%= @movie.poster %>">
     <p>Rated: <%= @movie.rating %><p> 
@@ -13,6 +11,8 @@
     <p>Genre: <%= @movie.genre %><p>
     <p>Plot: <%= @movie.blurb %><p>
     <p>Director: <%= @movie.director %><p>
+    <a href ="/users/<%= session[:user_id] %>">Back to your Posts </a>
+    <a href = "/posts" >Back to all Posts </a>
     <% @movie.posts.each do |post|%>
         <h3><%= post.title %></h3>
         <p><%= post.comment %></p>

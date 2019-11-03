@@ -27,7 +27,6 @@ class PostsController < ApplicationController
       if !!db_movie && movie.title == db_movie.title
         @movie = db_movie
       else
-        binding.pry
         @movie = Movie.create(
           :title => movie.title,
           :poster => movie.poster,
