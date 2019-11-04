@@ -1,1 +1,1 @@
-
+To run, open app in terminal and run shotgun.
