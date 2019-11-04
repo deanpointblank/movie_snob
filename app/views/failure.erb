@@ -5,5 +5,9 @@
   </head>
   <body>
     <h2>zoinks</h2>
+    <h3>looks like we ran into some issues</h3>
+    <% @errors.each do |error|%>
+      <h4><%= error %></h4>
+    <%end%>
   </body>
 </html>

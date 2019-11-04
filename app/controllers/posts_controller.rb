@@ -43,16 +43,19 @@ class PostsController < ApplicationController
       #redirect user to post page w/ error
       #binding.pry
       @user = User.find_by_id(session["user_id"])
-      redirect to "/posts"
+      erb :"/users/#{@user.id}"
     end
 
     @user = User.find_by_id(session["user_id"])
     @post = Post.new(title: params["title"], comment: params["comment"], user_id: @user.id, movie_id: @movie.id)
-    if !@post.comment.empty? && !@post.title.empty?
-      @post.save
+    if @post.save
+      erb :"/posts/index.html"
+    else
+      @errors = @post.errors.full_messages
+      erb :failure
     end
     #if no comment redirect to create page w/; eroor
-    erb :"/posts/index.html"
+    
   end
 
   # GET: /posts/5

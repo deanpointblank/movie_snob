@@ -21,6 +21,9 @@ class UsersController < ApplicationController
 
     if @user.save
       redirect to '/login'
+    else
+      @errors = @user.errors.full_messages
+      erb :failure
     end
     # binding.pry
     # redirect "/users"
